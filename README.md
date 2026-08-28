@@ -8,7 +8,7 @@
 * The TCA9548A is a very simple single register 8 channel i2c switch.
 
 * The TCA9548A version used here is the SparkFun Qwiic TCA9548A-8-channel-switch-Breakout.
-See the image at [SparkFun TCA9548A](SparkFun-©-TCA9548A-8-channel-switch-Breakout)
+See the image at [SparkFun TCA9548A](https://github.com/phoenixDownunder/tca9548a/blob/main/SparkFun-©-TCA9548A-8-channel-switch-Breakout#:~:text=TCA9548A%2D8%2Dchannel%2D-,switch,-%2DBreakout.jpg)
 
 --
 # Contents
