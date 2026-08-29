@@ -13,7 +13,7 @@
 
 /* Defines needed for the i2cDevicesHeader.h */
 #define TCA9548A
-#define FNSIZE 3
+#define FNSIZE 4
 
 #if __has_include("i2cIncludes.h")
 #include "i2cIncludes.h"
@@ -48,18 +48,18 @@ int main (int argc, char ** argv) {
  * If the device has been scanned or the application has been restarted,
  * the control register responds with the register address 0x70.
  * The recovered value is not used, display reference only.
+ * The recovered str is checked in inHex... see i2cConvenientBits.h in /headers/.
  */
    if (debug) {
       _ptr = fopen(fname, "r"); /* r or w for write */
       if (_ptr != NULL) {
          fgets(_str, FNSIZE, _ptr);
          fclose(_ptr);
-         _str[2] = '\0'; /* Just in case. */
+         _str[2] = '\0'; _str[3] = '\0'; /* Just in case. */
+         if (isHex(_str)) printf("\nTDA9548A control register: current setting is: 0x%s\n", _str);
       }
+      else printf("\nTDA9548A control register: current setting is unknown\n");
    }
-/* Check the recovered str is hex... see i2cConvenientBits.h in /headers/. */
-   if (isHex(_str)) printf("\nTDA9548A control register: current setting is: 0x%s.\n", _str);
-   else printf("\nTDA9548A control register current setting is unknown.\n");
 
 /* Scan. */
    if (argc == 1) {
@@ -100,7 +100,7 @@ int main (int argc, char ** argv) {
          exit(0);
       }
       devResult = i2c_smbus_read_byte(fp);
-      if (debug) printf("\nTCA9548A control register: new setting is: 0b%08b [0x%02X].\n\n", devResult, devResult);
+      if (debug) printf("\nTCA9548A control register: new setting is: 0b%08b [0x%02X]\n\n", devResult, devResult);
 
       _ptr = fopen(fname, "w"); /* r or w for write */
        if (_ptr != NULL) {
